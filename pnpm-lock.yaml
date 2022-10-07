@@ -5,6 +5,7 @@ specifiers:
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
   '@mui/material': ^5.10.8
+  '@types/node': ^18.8.3
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
   '@types/styled-components': ^5.1.26
@@ -25,6 +26,7 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.19.3
+  '@types/node': 18.8.3
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@types/styled-components': 5.1.26
@@ -654,6 +656,10 @@ packages:
     dependencies:
       '@types/react': 18.0.21
       hoist-non-react-statics: 3.3.2
+    dev: true
+
+  /@types/node/18.8.3:
+    resolution: {integrity: sha512-0os9vz6BpGwxGe9LOhgP/ncvYN5Tx1fNcd2TM3rD/aCGBkysb+ZWpXEocG24h6ZzOi13+VB8HndAQFezsSOw1w==}
     dev: true
 
   /@types/parse-json/4.0.0:
