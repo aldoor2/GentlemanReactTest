@@ -1,7 +1,7 @@
 import { Person } from '@/models'
 import { configureStore } from '@reduxjs/toolkit'
-import peopleSlice from './states/people'
-import favoritesSlice from './states/favorites'
+import { favoritesSlice } from './states/favorites'
+import { peopleSlice } from './states/people'
 
 export interface AppStore {
   people: Person[]
@@ -10,7 +10,7 @@ export interface AppStore {
 
 export default configureStore<AppStore>({
   reducer: {
-    people: peopleSlice,
-    favorites: favoritesSlice,
+    people: peopleSlice.reducer,
+    favorites: favoritesSlice.reducer,
   },
 })
