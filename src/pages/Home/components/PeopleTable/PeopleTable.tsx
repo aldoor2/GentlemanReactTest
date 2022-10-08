@@ -1,5 +1,5 @@
 import { Person } from '@/models'
-import { addFavorites } from '@/redux/states/favorites'
+import { addFavorite } from '@/redux/states/favorites'
 import { AppStore } from '@/redux/store'
 import { Checkbox } from '@mui/material'
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
@@ -13,6 +13,7 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
   const pageSize = 5
   const dispatch = useDispatch()
   const statePeople = useSelector((state: AppStore) => state.people)
+  const favoritesPeople = useSelector((state: AppStore) => state.favorites)
 
   /**
    * Check if the person is selected or not
@@ -20,7 +21,7 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
    * @returns True if the person is selected, false otherwise
    */
   const findPerson = (person: Person): boolean =>
-    !!selectedPeople.find((p) => p.id === person.id)
+    !!favoritesPeople.find((p) => p.id === person.id)
 
   /**
    * Remove a person to list of selected people
@@ -28,14 +29,14 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
    * @returns A new list of selected people filtered
    */
   const filterPerson = (person: Person): Person[] =>
-    selectedPeople.filter((p) => p.id !== person.id)
+    favoritesPeople.filter((p) => p.id !== person.id)
 
   const handleChange = (person: Person) => {
     const filteredPeople = findPerson(person)
       ? filterPerson(person)
       : [...selectedPeople, person]
 
-    dispatch(addFavorites(filteredPeople))
+    dispatch(addFavorite(filteredPeople))
     setSelectedPeople(filteredPeople)
   }
 
@@ -77,7 +78,18 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
       minWidth: 150,
       renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
     },
+    {
+      field: 'levelOfHappeness',
+      headerName: 'Level of happeness',
+      flex: 1,
+      minWidth: 150,
+      renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
+    },
   ]
+
+  React.useEffect(() => {
+    setSelectedPeople(favoritesPeople)
+  }, [favoritesPeople])
 
   return (
     <DataGrid
